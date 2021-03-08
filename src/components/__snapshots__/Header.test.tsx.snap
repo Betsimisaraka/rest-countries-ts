@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header />  1`] = `
+<div>
+  <h1
+    data-testid="page-title"
+  >
+    Where in the world
+  </h1>
+  <p>
+    Dark mode
+  </p>
+</div>
+`;
