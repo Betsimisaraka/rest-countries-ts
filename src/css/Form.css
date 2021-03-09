@@ -1,0 +1,15 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset {
+    border: none;
+}
+
+@media (min-width: 1000px) {
+    form {
+        display: flex;
+        flex-direction: row;
+    }
+}
