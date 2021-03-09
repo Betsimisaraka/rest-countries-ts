@@ -3,13 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
 import Home from './pages/Home';
+import GlobalState from './components/GlobalState';
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Home />
-    </div>
+    <GlobalState>
+        <Header />
+        <Home />
+    </GlobalState>
   );
 }
 
