@@ -4,12 +4,21 @@ import './App.css';
 import Header from './components/Header';
 import Home from './pages/Home';
 import GlobalState from './components/GlobalState';
+import { Route, Switch } from 'react-router';
+import Details from './components/Details';
 
 function App() {
   return (
     <GlobalState>
         <Header />
-        <Home />
+          <Switch>
+              <Route path="/details/:name">
+                  <Details />
+              </Route>
+             <Route path="/">
+                <Home />
+             </Route>
+          </Switch>
     </GlobalState>
   );
 }
