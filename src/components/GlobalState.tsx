@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer } from 'react';
+import React, { ChangeEvent, createContext, useEffect, useReducer } from 'react';
 
 type Language = {
     name: string
@@ -36,17 +36,20 @@ type CountriesType = {
 };
 
 type State = {
-    isLoading: boolean,
-    countries: CountriesType[],
+    isLoading: boolean;
+    countries: CountriesType[];
+    dispatch: React.Dispatch<any>;
 }
 
 const initialState: State = {
     isLoading: true,
     countries: [],
+    dispatch: () => null
 }
 
 type Action = 
     | {type: "FETCH_DATA", results: CountriesType[]}
+    | { type: "SEARCH_COUNTRY", payload: CountriesType[]}
 
 
 
@@ -56,7 +59,9 @@ export const GlobalContext = createContext(initialState);
 function reducer(state: State = initialState, action: Action) {
     switch (action.type) {
         case "FETCH_DATA":
-            return {isLoading: false, countries: action.results};
+            return {...state, isLoading: false, countries: action.results};
+        case "SEARCH_COUNTRY":
+            return {...state, countries: action.payload};
         default:
             return state;
     }
@@ -74,12 +79,17 @@ const GlobalState: React.FC = ({ children }) => {
     
     useEffect(() => {
         fetchData();
-    }, [])
+    }, []);
+
+    // function searchCountry() {
+    //     const filterCountry = countries.filter(country => country.name.toLowerCase().includes(value.toLowerCase()));
+    // }
 
     return (
         <GlobalContext.Provider value={{ 
             isLoading: state.isLoading,
-            countries: state.countries
+            countries: state.countries,
+            dispatch
         }}>
             {children}
         </GlobalContext.Provider>

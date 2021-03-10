@@ -7,6 +7,26 @@ fieldset {
     border: none;
 }
 
+fieldset label {
+    display: none;
+}
+
+fieldset input {
+    background-color: hsl(0, 0%, 100%);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: none;
+    box-shadow: 2px 2px 2px hsl(0, 0%, 52%);
+}
+
+fieldset select {
+    background-color: hsl(0, 0%, 100%);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: none;
+    box-shadow: 2px 2px 2px hsl(0, 0%, 52%);
+}
+
 @media (min-width: 1000px) {
     form {
         display: flex;
