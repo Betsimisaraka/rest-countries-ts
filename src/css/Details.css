@@ -1,0 +1,15 @@
+@media (min-width: 1000px) {
+    .detail_container{
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .details_content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .details_moreinfo {
+        display: flex;
+        flex-direction: row;
+    }
+}
