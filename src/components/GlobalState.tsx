@@ -39,17 +39,28 @@ type State = {
     isLoading: boolean;
     countries: CountriesType[];
     dispatch: React.Dispatch<any>;
+    countryName: string;
+    regionName: string;
+    regions: string[],
+    searchCountry: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    filterRegion: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const initialState: State = {
     isLoading: true,
     countries: [],
-    dispatch: () => null
+    regions: ["Africa", "America", "Asia", "Europe", "Oceanie"],
+    countryName: '',
+    regionName: '',
+    searchCountry: () => {},
+    filterRegion: () => {},
+    dispatch: () => {}
 }
 
 type Action = 
     | {type: "FETCH_DATA", results: CountriesType[]}
-    | { type: "SEARCH_COUNTRY", payload: CountriesType[]}
+    | { type: "SEARCH_COUNTRY", payload: string }
+    | { type: "FILTER_REGION", payload: string }
 
 
 
@@ -61,7 +72,9 @@ function reducer(state: State = initialState, action: Action) {
         case "FETCH_DATA":
             return {...state, isLoading: false, countries: action.results};
         case "SEARCH_COUNTRY":
-            return {...state, countries: action.payload};
+            return {...state, countryName: action.payload};
+        case "FILTER_REGION":
+            return {...state, regionName: action.payload}
         default:
             return state;
     }
@@ -81,14 +94,16 @@ const GlobalState: React.FC = ({ children }) => {
         fetchData();
     }, []);
 
-    // function searchCountry() {
-    //     const filterCountry = countries.filter(country => country.name.toLowerCase().includes(value.toLowerCase()));
-    // }
-
+  
     return (
         <GlobalContext.Provider value={{ 
             isLoading: state.isLoading,
             countries: state.countries,
+            countryName: state.countryName,
+            regions: state.regions,
+            regionName: state.regionName,
+            searchCountry: (e) => dispatch({ type: "SEARCH_COUNTRY", payload: e.target.value }),
+            filterRegion: (e) => dispatch({ type: "FILTER_REGION", payload: e.target.value }),
             dispatch
         }}>
             {children}

@@ -1,33 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import '../css/Form.css';
 import { GlobalContext } from './GlobalState';
 
 const Form = () => {
-    const [regions, setRegions] = useState(["Africa", "America", "Asia", "Europe", "Oceanie"]);
-    const { dispatch, countries } = useContext(GlobalContext);
-    const [ value, setValue ] = useState('');
-
-    type Event = {
-        target: HTMLInputElement
-    }
-
-    function searchCountry(e: Event) {
-        setValue(e.target.value);
-        const filter = countries.filter(country => country.name.toLowerCase().includes(value.toLowerCase()));
-        dispatch({ type: "SEARCH_COUNTRY", payload: filter })
-    }
-
+    const { searchCountry, countryName, regions, regionName, filterRegion } = useContext(GlobalContext);
+    console.log(regionName);
 
     return (
         <form>
             <fieldset>
                 <label htmlFor="">Search</label>
-                <input type="text" value={value} onChange={searchCountry}/>
+                <input type="text" value={countryName} onChange={searchCountry}/>
             </fieldset>
             <fieldset>
                 <label htmlFor="region">Filter by Region</label>
-                <select name="region" id="region">
+                <select name="region" id="region" value={regionName} onChange={filterRegion}>
                     {regions.map(region => (
                         <option value={region}>{region}</option>
                     ))}

@@ -4,14 +4,18 @@ import '../css/Card.css';
 import { Link } from 'react-router-dom';
 
 const Card = () => {
-    const { isLoading, countries } = useContext(GlobalContext);
+    const { isLoading, countries, countryName, regionName } = useContext(GlobalContext);
     
     return (
         <div className="card_container">
             {isLoading && <h2>Is loading...</h2>}
                 <ul className="cart_lists">
                     {!isLoading && (
-                        countries.map(country => (
+                        countries
+                        .filter(country => 
+                            country.name.toLowerCase().includes(countryName.toLowerCase()) &&
+                            country.region.toLowerCase().includes(regionName.toLowerCase()))
+                        .map(country => (
                             <Link to={`/details/${country.name}`}>
                                 <li className="card_lists__items">
                                     <img src={country.flag} alt="Country's flag"/>
