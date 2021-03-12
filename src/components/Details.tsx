@@ -10,10 +10,15 @@ const Details = () => {
     type ParamName = {
         name: string,
     }
+    type Border = {
+        ciod: string,
+    }
     const { name } = useParams<ParamName>();
     
     const findCountry = countries.find(country => country.name === name);
-    console.log(findCountry);
+
+    // const findBorder = countries.find(border => border.cioc === findCountry?.borders);
+    // console.log(findBorder);
     
     return (
         <div className="detail_container">

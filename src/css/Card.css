@@ -9,6 +9,10 @@
     row-gap: 42px;
 }
 
+.cart_lists a {
+    text-decoration: none;
+}
+
 .cart_lists .card_lists__items {
     background-color: hsl(0, 0%, 100%);
 }
@@ -20,6 +24,15 @@
 .card_content h2 {
     margin: 0;
     padding: 0;
+    color: hsl(200, 15%, 8%);
+}
+
+.card_content p {
+    color: hsl(207, 26%, 17%);
+}
+
+.card_content p span {
+    color: hsl(0, 0%, 52%);
 }
 
 img {

@@ -5,13 +5,12 @@ import { GlobalContext } from './GlobalState';
 
 const Form = () => {
     const { searchCountry, countryName, regions, regionName, filterRegion } = useContext(GlobalContext);
-    console.log(regionName);
 
     return (
         <form>
             <fieldset>
                 <label htmlFor="">Search</label>
-                <input type="text" value={countryName} onChange={searchCountry}/>
+                <input type="text" value={countryName} onChange={searchCountry} placeholder="Search for a country..."/>
             </fieldset>
             <fieldset>
                 <label htmlFor="region">Filter by Region</label>

@@ -1,3 +1,18 @@
+.details_moreinfo div h2 {
+    margin: 0;
+    padding: 0;
+    color: hsl(200, 15%, 8%);
+}
+
+.details_moreinfo div p {
+    color: hsl(207, 26%, 17%);
+}
+
+.details_moreinfo div p span {
+    color: hsl(0, 0%, 52%);
+}
+
+
 @media (min-width: 1000px) {
     .detail_container{
         max-width: 1000px;

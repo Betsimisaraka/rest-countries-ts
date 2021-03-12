@@ -42,8 +42,10 @@ type State = {
     countryName: string;
     regionName: string;
     regions: string[],
-    searchCountry: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    filterRegion: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    theme: boolean,
+    searchCountry: (e: ChangeEvent<HTMLInputElement>) => void;
+    filterRegion: (e: ChangeEvent<HTMLSelectElement>) => void;
+    changeTheme: () => void;
 }
 
 const initialState: State = {
@@ -52,8 +54,10 @@ const initialState: State = {
     regions: ["Africa", "America", "Asia", "Europe", "Oceanie"],
     countryName: '',
     regionName: '',
+    theme: true,
     searchCountry: () => {},
     filterRegion: () => {},
+    changeTheme: () => {},
     dispatch: () => {}
 }
 
@@ -61,8 +65,7 @@ type Action =
     | {type: "FETCH_DATA", results: CountriesType[]}
     | { type: "SEARCH_COUNTRY", payload: string }
     | { type: "FILTER_REGION", payload: string }
-
-
+    | { type: "THEME" }
 
 export const GlobalContext = createContext(initialState);
 
@@ -74,7 +77,9 @@ function reducer(state: State = initialState, action: Action) {
         case "SEARCH_COUNTRY":
             return {...state, countryName: action.payload};
         case "FILTER_REGION":
-            return {...state, regionName: action.payload}
+            return {...state, regionName: action.payload};
+        case "THEME":
+            return {...state, theme: !state.theme}
         default:
             return state;
     }
@@ -102,8 +107,10 @@ const GlobalState: React.FC = ({ children }) => {
             countryName: state.countryName,
             regions: state.regions,
             regionName: state.regionName,
+            theme: state.theme,
             searchCountry: (e) => dispatch({ type: "SEARCH_COUNTRY", payload: e.target.value }),
             filterRegion: (e) => dispatch({ type: "FILTER_REGION", payload: e.target.value }),
+            changeTheme: () => dispatch({ type: "THEME" }),
             dispatch
         }}>
             {children}
